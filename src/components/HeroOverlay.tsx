@@ -1,10 +1,34 @@
+import { useEffect, useState } from "react";
 import { IMAGES } from "../constants/images";
+import { supabase } from "../lib/supabase";
 
 interface HeroOverlayProps {
   onOpen: () => void;
 }
 
+interface Guest {
+  id: number;
+  slug: string;
+  name: string;
+}
+
 export default function HeroOverlay({ onOpen }: HeroOverlayProps) {
+  const [guest, setGuest] = useState<Guest | null>(null);
+
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get("to");
+    if (slug) {
+      supabase
+        .from("guests")
+        .select("*")
+        .eq("slug", slug)
+        .single()
+        .then(({ data }) => {
+          if (data) setGuest(data);
+        });
+    }
+  }, []);
+
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center bg-surface overflow-hidden"
@@ -36,7 +60,7 @@ export default function HeroOverlay({ onOpen }: HeroOverlayProps) {
             Kepada Yth. Bapak/Ibu/Saudara/i
           </p>
           <h3 className="font-[var(--font-family-playfair)] text-[24px] leading-[1.4] font-semibold text-on-surface">
-            Tamu Undangan Spesial
+            {guest?.name || "Tamu Undangan Spesial"}
           </h3>
         </div>
         <button

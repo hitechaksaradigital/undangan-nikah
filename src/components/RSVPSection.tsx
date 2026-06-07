@@ -12,13 +12,27 @@ export default function RSVPSection() {
   const [wishes, setWishes] = useState<Wish[]>([]);
   const [wishText, setWishText] = useState("");
   const [rsvpName, setRsvpName] = useState("");
+  const [rsvpPhone, setRsvpPhone] = useState("");
   const [guestCount, setGuestCount] = useState("1 Orang");
   const [attendance, setAttendance] = useState<string | null>(null);
   const [rsvpSubmitted, setRsvpSubmitted] = useState(false);
 
   useEffect(() => {
     fetchWishes();
+    fetchGuest();
   }, []);
+
+  const fetchGuest = async () => {
+    const slug = new URLSearchParams(window.location.search).get("to");
+    if (slug) {
+      const { data } = await supabase
+        .from("guests")
+        .select("name")
+        .eq("slug", slug)
+        .single();
+      if (data) setRsvpName(data.name);
+    }
+  };
 
   const fetchWishes = async () => {
     const { data } = await supabase
@@ -52,15 +66,37 @@ export default function RSVPSection() {
   };
 
   const handleSubmitRSVP = async () => {
-    if (rsvpName.trim() && attendance) {
+    if (rsvpName.trim() && rsvpPhone.trim() && attendance) {
       const { error } = await supabase.from("rsvp").insert({
         name: rsvpName,
+        phone: rsvpPhone.replace(/\D/g, ""),
         guest_count: guestCount,
         attendance: attendance,
       });
 
       if (!error) {
         setRsvpSubmitted(true);
+        const phone = rsvpPhone.replace(/\D/g, "");
+        const waTarget = phone.startsWith("0") ? "62" + phone.slice(1) : phone;
+        const attendanceText = attendance === "hadir" ? "Hadir" : "Tidak Hadir";
+        const waMessage = `Halo ${rsvpName},\n\nTerima kasih telah mengonfirmasi kehadiran.\n\nNama: ${rsvpName}\nNo HP: ${rsvpPhone}\nJumlah Tamu: ${guestCount}\nStatus: ${attendanceText}\n\nSemoga dapat hadir dan berbagi kebahagiaan bersama kami.`;
+
+        try {
+          await fetch("https://api.fonnte.com/send", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+              target: waTarget,
+              message: waMessage,
+              token: import.meta.env.VITE_FONTTE_TOKEN,
+            }),
+          });
+        } catch (waError) {
+          console.error("Gagal mengirim WhatsApp:", waError);
+        }
+
         setTimeout(() => setRsvpSubmitted(false), 3000);
       }
     }
@@ -85,6 +121,18 @@ export default function RSVPSection() {
                 type="text"
                 value={rsvpName}
                 onChange={(e) => setRsvpName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="font-[var(--font-family-montserrat)] text-[12px] leading-[1.2] tracking-[0.15em] font-semibold text-secondary mb-2 block">
+                NOMOR HP
+              </label>
+              <input
+                className="w-full bg-transparent border-0 border-b border-secondary-fixed focus:ring-0 focus:border-primary focus:outline-none px-0 py-2 font-[var(--font-family-montserrat)] text-[16px] leading-[1.6]"
+                placeholder="Contoh: 08123456789"
+                type="tel"
+                value={rsvpPhone}
+                onChange={(e) => setRsvpPhone(e.target.value)}
               />
             </div>
             <div>
@@ -135,7 +183,7 @@ export default function RSVPSection() {
               className="w-full py-4 bg-on-secondary-fixed text-primary-fixed font-[var(--font-family-montserrat)] text-[12px] leading-[1.2] tracking-[0.15em] font-semibold rounded-[0.25rem] hover:opacity-90 transition-opacity tracking-widest mt-8 cursor-pointer disabled:opacity-50"
               type="button"
               onClick={handleSubmitRSVP}
-              disabled={!attendance}
+              disabled={!attendance || !rsvpPhone.trim()}
             >
               {rsvpSubmitted ? "✓ KONFIRMASI TERKIRIM" : "KIRIM KONFIRMASI"}
             </button>
