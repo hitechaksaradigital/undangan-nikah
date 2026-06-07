@@ -1,52 +1,68 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "../lib/supabase";
 
 interface Wish {
+  id: number;
   name: string;
   message: string;
-  time: string;
+  created_at: string;
 }
 
-const initialWishes: Wish[] = [
-  {
-    name: "Keluarga Bpk. Santoso",
-    message:
-      "Selamat menempuh hidup baru Fulana & Fulan! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.",
-    time: "2 jam yang lalu",
-  },
-  {
-    name: "Riana Putri",
-    message:
-      "Happy wedding ya guys! Lancar sampai hari H dan bahagia selalu selamanya!",
-    time: "5 jam yang lalu",
-  },
-];
-
 export default function RSVPSection() {
-  const [wishes, setWishes] = useState<Wish[]>(initialWishes);
+  const [wishes, setWishes] = useState<Wish[]>([]);
   const [wishText, setWishText] = useState("");
   const [rsvpName, setRsvpName] = useState("");
   const [guestCount, setGuestCount] = useState("1 Orang");
   const [attendance, setAttendance] = useState<string | null>(null);
   const [rsvpSubmitted, setRsvpSubmitted] = useState(false);
 
-  const handleSubmitWish = () => {
+  useEffect(() => {
+    fetchWishes();
+  }, []);
+
+  const fetchWishes = async () => {
+    const { data } = await supabase
+      .from("wishes")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (data) setWishes(data);
+  };
+
+  const formatTimeAgo = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    if (diffHours < 1) return "Baru saja";
+    return `${diffHours} jam yang lalu`;
+  };
+
+  const handleSubmitWish = async () => {
     if (wishText.trim()) {
-      setWishes([
-        {
-          name: rsvpName || "Anonim",
-          message: wishText,
-          time: "Baru saja",
-        },
-        ...wishes,
-      ]);
-      setWishText("");
+      const { error } = await supabase.from("wishes").insert({
+        name: rsvpName || "Anonim",
+        message: wishText,
+      });
+
+      if (!error) {
+        setWishText("");
+        fetchWishes();
+      }
     }
   };
 
-  const handleSubmitRSVP = () => {
-    if (rsvpName.trim()) {
-      setRsvpSubmitted(true);
-      setTimeout(() => setRsvpSubmitted(false), 3000);
+  const handleSubmitRSVP = async () => {
+    if (rsvpName.trim() && attendance) {
+      const { error } = await supabase.from("rsvp").insert({
+        name: rsvpName,
+        guest_count: guestCount,
+        attendance: attendance,
+      });
+
+      if (!error) {
+        setRsvpSubmitted(true);
+        setTimeout(() => setRsvpSubmitted(false), 3000);
+      }
     }
   };
 
@@ -116,9 +132,10 @@ export default function RSVPSection() {
               </div>
             </div>
             <button
-              className="w-full py-4 bg-on-secondary-fixed text-primary-fixed font-[var(--font-family-montserrat)] text-[12px] leading-[1.2] tracking-[0.15em] font-semibold rounded-[0.25rem] hover:opacity-90 transition-opacity tracking-widest mt-8 cursor-pointer"
+              className="w-full py-4 bg-on-secondary-fixed text-primary-fixed font-[var(--font-family-montserrat)] text-[12px] leading-[1.2] tracking-[0.15em] font-semibold rounded-[0.25rem] hover:opacity-90 transition-opacity tracking-widest mt-8 cursor-pointer disabled:opacity-50"
               type="button"
               onClick={handleSubmitRSVP}
+              disabled={!attendance}
             >
               {rsvpSubmitted ? "✓ KONFIRMASI TERKIRIM" : "KIRIM KONFIRMASI"}
             </button>
@@ -147,9 +164,9 @@ export default function RSVPSection() {
 
           {/* Wishes List */}
           <div className="space-y-4 max-h-[400px] overflow-y-auto pr-4 scrollbar-thin">
-            {wishes.map((wish, index) => (
+            {wishes.map((wish) => (
               <div
-                key={index}
+                key={wish.id}
                 className="p-4 bg-surface-container-lowest border border-outline-variant/20 rounded-[0.25rem]"
               >
                 <p className="font-[var(--font-family-montserrat)] text-[16px] leading-[1.6] font-semibold mb-1">
@@ -159,7 +176,7 @@ export default function RSVPSection() {
                   {wish.message}
                 </p>
                 <p className="text-[10px] text-outline-variant mt-2">
-                  {wish.time}
+                  {formatTimeAgo(wish.created_at)}
                 </p>
               </div>
             ))}
