@@ -71,13 +71,13 @@ export default function GiftSection() {
             bankName="BANK BCA"
             accountNumber="1234567890"
             displayNumber="1234 5678 90"
-            accountHolder="Aurelia Widjaja"
+            accountHolder="Fulana binti Rahman"
           />
           <BankCard
             bankName="BANK MANDIRI"
             accountNumber="0987654321"
             displayNumber="0987 6543 21"
-            accountHolder="Julian Pratama"
+            accountHolder="Fulan bin Abdullah"
           />
         </div>
       </div>

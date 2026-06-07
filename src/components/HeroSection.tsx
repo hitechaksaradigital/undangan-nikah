@@ -11,7 +11,7 @@ export default function HeroSection() {
         <img
           className="w-full h-full object-cover"
           src={IMAGES.heroMain}
-          alt="Romantic pre-wedding portrait of a couple in elegant attire"
+          alt="Potret pasangan muslim dalam balutan busana pengantin"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-surface/20 via-transparent to-surface"></div>
       </div>
@@ -19,14 +19,16 @@ export default function HeroSection() {
       {/* Content */}
       <div className="text-center px-5 max-w-2xl">
         <p className="font-[var(--font-family-montserrat)] text-[12px] leading-[1.2] tracking-[0.15em] font-semibold text-primary mb-6">
-          SAVE THE DATE | 24.08.2024
+          SAVE THE DATE | 24.08.2025
         </p>
-        <h2 className="font-[var(--font-family-playfair)] text-[40px] md:text-[64px] leading-[1.2] md:leading-[1.1] tracking-[-0.01em] md:tracking-[-0.02em] font-semibold mb-8 italic">
-          Love is patient, Love is kind.
+        <h2 className="font-[var(--font-family-playfair)] text-[40px] md:text-[64px] leading-[1.2] md:leading-[1.1] tracking-[-0.01em] md:tracking-[-0.02em] font-semibold mb-4 italic">
+          Dan Kami ciptakan kamu berpasang-pasangan.
         </h2>
+        <p className="font-[var(--font-family-montserrat)] text-[12px] leading-[1.2] tracking-[0.15em] font-semibold text-primary/70 mb-8">
+          QS. AN-NABA': 8
+        </p>
         <p className="font-[var(--font-family-montserrat)] text-[18px] leading-[1.6] tracking-[0.01em] text-secondary">
-          Kami mengundang Bapak/Ibu/Saudara/i untuk merayakan penyatuan cinta
-          abadi kami.
+          Kami mengundang Bapak/Ibu/Saudara/i untuk merayakan penyatuan cinta abadi kami.
         </p>
       </div>
     </section>

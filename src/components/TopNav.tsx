@@ -10,7 +10,7 @@ export default function TopNav({ visible }: TopNavProps) {
       }`}
     >
       <span className="font-[var(--font-family-playfair)] text-[24px] leading-[1.4] font-medium tracking-widest text-primary uppercase">
-        AURELIA
+        FULANA
       </span>
       <div className="hidden md:flex gap-12 items-center">
         <a

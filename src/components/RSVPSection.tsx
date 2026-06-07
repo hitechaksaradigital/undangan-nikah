@@ -10,7 +10,7 @@ const initialWishes: Wish[] = [
   {
     name: "Keluarga Bpk. Santoso",
     message:
-      "Selamat menempuh hidup baru Aurelia & Julian! Semoga menjadi keluarga yang sakinah, mawadah, warahmah.",
+      "Selamat menempuh hidup baru Fulana & Fulan! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.",
     time: "2 jam yang lalu",
   },
   {

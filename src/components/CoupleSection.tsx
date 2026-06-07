@@ -20,15 +20,15 @@ export default function CoupleSection() {
               <img
                 className="w-full h-full object-cover rounded-full"
                 src={IMAGES.groom}
-                alt="Groom portrait in elegant suit"
+                alt="Foto mempelai pria muslim"
               />
             </div>
             <div>
               <h3 className="font-[var(--font-family-playfair)] text-[24px] leading-[1.4] font-medium text-on-surface mb-2">
-                Julian Pratama, S.T.
+                Fulan bin Abdullah, S.T.
               </h3>
               <p className="font-[var(--font-family-montserrat)] text-[16px] leading-[1.6] text-secondary">
-                Putra kedua dari Bapak Aris Pratama &amp; Ibu Shinta Pratama
+                Putra kedua dari Bapak Abdullah &amp; Ibu Siti Aminah
               </p>
               <div className="mt-4 flex justify-center gap-4">
                 <a
@@ -47,15 +47,15 @@ export default function CoupleSection() {
               <img
                 className="w-full h-full object-cover rounded-full"
                 src={IMAGES.bride}
-                alt="Bride portrait in elegant wedding dress"
+                alt="Foto mempelai wanita muslimah berhijab"
               />
             </div>
             <div>
               <h3 className="font-[var(--font-family-playfair)] text-[24px] leading-[1.4] font-medium text-on-surface mb-2">
-                Aurelia Widjaja, M.Ds.
+                Fulana binti Rahman, M.Ds.
               </h3>
               <p className="font-[var(--font-family-montserrat)] text-[16px] leading-[1.6] text-secondary">
-                Putri pertama dari Bapak Henry Widjaja &amp; Ibu Maria Widjaja
+                Putri pertama dari Bapak Rahman &amp; Ibu Fatimah
               </p>
               <div className="mt-4 flex justify-center gap-4">
                 <a

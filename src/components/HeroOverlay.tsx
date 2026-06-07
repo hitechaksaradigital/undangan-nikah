@@ -15,7 +15,7 @@ export default function HeroOverlay({ onOpen }: HeroOverlayProps) {
         <img
           className="w-full h-full object-cover"
           src={IMAGES.heroOverlay}
-          alt="Luxury wedding venue with soft golden hour sunlight"
+          alt="Dekorasi pernikahan islami yang elegan"
         />
       </div>
 
@@ -29,7 +29,7 @@ export default function HeroOverlay({ onOpen }: HeroOverlayProps) {
         <h1
           className="font-[var(--font-family-playfair)] text-[40px] md:text-[64px] leading-[1.2] md:leading-[1.1] tracking-[-0.01em] md:tracking-[-0.02em] font-semibold text-primary-container mb-12"
         >
-          Aurelia &amp; Julian
+          Fulana &amp; Fulan
         </h1>
         <div className="mb-12">
           <p className="font-[var(--font-family-montserrat)] text-[16px] leading-[1.6] text-secondary mb-2 italic">

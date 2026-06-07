@@ -44,11 +44,11 @@ export default function EventSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Event Cards */}
           <div className="space-y-8">
-            {/* Pemberkatan Nikah */}
+            {/* Akad Nikah */}
             <div className="p-8 md:p-12 border border-outline-variant/30 bg-surface/50 rounded-[0.5rem] shadow-[0px_4px_20px_rgba(26,26,26,0.05)] relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
               <h4 className="font-[var(--font-family-montserrat)] text-[12px] leading-[1.2] tracking-[0.15em] font-semibold text-primary mb-6">
-                PEMBERKATAN NIKAH
+                AKAD NIKAH
               </h4>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
@@ -72,9 +72,9 @@ export default function EventSection() {
                     location_on
                   </span>
                   <p className="font-[var(--font-family-montserrat)] text-[16px] leading-[1.6]">
-                    Gereja Katedral Jakarta
+                    Masjid Istiqlal Jakarta
                     <br />
-                    Jl. Lap. Banteng Utara No.7B
+                    Jl. Taman Wijaya Kusuma, Jakarta Pusat
                   </p>
                 </div>
               </div>
@@ -84,7 +84,7 @@ export default function EventSection() {
             </div>
 
             {/* Resepsi */}
-            <div className="p-8 md:p-12 border border-primary-container/30 bg-surface/80 rounded-[0.5rem] shadow-[0px_4px_20px_rgba(115,92,0,0.05)] relative overflow-hidden group">
+            <div className="p-8 md:p-12 border border-primary-container/30 bg-surface/80 rounded-[0.5rem] shadow-[0px_4px_20px_rgba(26,86,168,0.08)] relative overflow-hidden group">
               <h4 className="font-[var(--font-family-montserrat)] text-[12px] leading-[1.2] tracking-[0.15em] font-semibold text-primary mb-6">
                 RESEPSI
               </h4>
@@ -129,8 +129,8 @@ export default function EventSection() {
                 Momen Menuju Hari Bahagia
               </h2>
               <p className="font-[var(--font-family-montserrat)] text-[18px] leading-[1.6] tracking-[0.01em] text-secondary">
-                Waktu terus berjalan menuju saat di mana janji suci akan
-                diucapkan di hadapan Tuhan dan para saksi.
+                Waktu terus berjalan menuju saat di mana ijab kabul akan
+                diucapkan di hadapan Allah SWT dan para saksi.
               </p>
             </div>
 

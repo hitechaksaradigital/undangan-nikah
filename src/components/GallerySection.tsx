@@ -21,7 +21,7 @@ export default function GallerySection() {
             <img
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"
               src={IMAGES.gallery1}
-              alt="Romantic couple walking through a golden field at sunset"
+              alt="Pasangan muslim bahagia berfoto di taman"
             />
           </div>
 
@@ -30,7 +30,7 @@ export default function GallerySection() {
             <img
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"
               src={IMAGES.gallery2}
-              alt="Close-up of couple's hands with engagement ring"
+              alt="Tangan pengantin dengan henna dan cincin nikah"
             />
           </div>
 
@@ -39,7 +39,7 @@ export default function GallerySection() {
             <img
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"
               src={IMAGES.gallery3}
-              alt="Artistic pre-wedding photo in modern architectural setting"
+              alt="Pasangan pengantin muslim dalam cahaya lembut"
             />
           </div>
 
@@ -48,7 +48,7 @@ export default function GallerySection() {
             <img
               className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"
               src={IMAGES.gallery4}
-              alt="Couple sharing a quiet moment at dusk with city lights"
+              alt="Pasangan menikmati senja indah bersama"
             />
           </div>
         </div>
